@@ -4,7 +4,10 @@ FROM alpine:latest
 # Install cURL to perform the file download
 RUN apk add --no-cache curl
 
-# Download the file from the specified URL
+ARG FILE_URL
+ARG TARGET_CONTAINER
+
+# Download the file from the specified URL during the build
 RUN curl -o /path/in/container/file.ext $FILE_URL
 
 # Copy the file to the specified container directory
