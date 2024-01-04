@@ -4,4 +4,4 @@
 curl -o /shared/librechat.yaml $FILE_URL
 
 # Copy the file to the /app directory within the shared volume
-cp /shared/librechat.yaml /app/
+cp /shared/librechat.yaml /app/librechat.yaml
