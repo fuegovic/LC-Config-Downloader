@@ -1,3 +1,3 @@
 #!/bin/sh
 
-curl -o /shared/librechat.yaml $FILE_URL
+curl -o /app/librechat.yaml $FILE_URL
