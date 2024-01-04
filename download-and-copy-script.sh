@@ -1,13 +1,13 @@
 #!/bin/sh
 
 # Use the environment variable to download the file to the shared volume
-curl -o /librechat.yaml $FILE_URL
+curl -o /shared/librechat.yaml $FILE_URL
 
-# # Check if the file "librechat.yaml" exists in the "/shared" directory before attempting to copy it
-# if [ -f "/LibreChat/shared/librechat.yaml" ]; then
-#   # Copy the file to the /app directory within the shared volume
-#   cp /shared/librechat.yaml /app/librechat.yaml
-#   echo "File copied successfully"
-# else
-#   echo "Error: The file librechat.yaml does not exist in the shared directory"
-# fi
+# Check if the file "librechat.yaml" exists in the "/shared" directory before attempting to copy it
+if [ -f "/shared/librechat.yaml" ]; then
+  # Copy the file to the /app
+  cp /shared/librechat.yaml ../librechat.yaml
+  echo "File copied successfully"
+else
+  echo "Error: The file librechat.yaml does not exist in the shared directory"
+fi
