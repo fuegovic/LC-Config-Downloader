@@ -1,9 +1,13 @@
-#!/bin/bash
-# Assign a default value to FILE_URL if it is unset or null
-FILE_URL=${FILE_URL:-https://raw.githubusercontent.com/danny-avila/LibreChat/main/librechat.example.yaml}
+#!/bin/sh
+
+# Use the environment variable to download the file to the shared volume
 curl -o /shared/librechat.yaml $FILE_URL
+
+# Check if the file "librechat.yaml" exists in the "/shared" directory before attempting to copy it
 if [ -f "/shared/librechat.yaml" ]; then
-  echo "File downloaded successfully to shared volume"
+  # Copy the file to the /app
+  cp /shared/librechat.yaml ../librechat.yaml
+  echo "File copied successfully"
 else
-  echo "Error: The file librechat.yaml was not downloaded"
+  echo "Error: The file librechat.yaml does not exist in the shared directory"
 fi
