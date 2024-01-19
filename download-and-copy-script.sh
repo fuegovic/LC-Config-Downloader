@@ -13,7 +13,7 @@ fi
 if [ -f "/shared/librechat.yaml" ]; then
     # Copy the file to the /app
     if cp "/shared/librechat.yaml" "../librechat.yaml"; then
-        echo "File copied successfully"
+        echo "File copied successfully from $FILE_URL"
     else
         echo "Error: Failed to copy librechat.yaml to /app" >&2
         exit 1
