@@ -22,7 +22,7 @@ To use LC Config Downloader, you'll need a Docker environment ready. The script 
 
 #### Environment Variables
 
-- `FILE_URL` – The URL from which the `librechat.yaml` file should be downloaded. If not provided, a default example configuration will be used.
+- `CONFIG_URL` – The URL from which the `librechat.yaml` file should be downloaded. If not provided, a default example configuration will be used.
 
 #### Docker Compose Setup
 
@@ -43,7 +43,7 @@ Here's how you can set it up using Docker Compose for both standard Docker insta
         container_name: ConfigDownloader
         image: ghcr.io/fuegovic/lc-config-downloader:latest
         environment:
-          - FILE_URL=https://my-custom-url-to/librechat.yaml
+          - CONFIG_URL=https://my-custom-url-to/librechat.yaml
         volumes:
           - shared-config:/shared
     volumes:
@@ -74,7 +74,7 @@ Here's how you can set it up using Docker Compose for both standard Docker insta
         container_name: ConfigDownloader
         image: ghcr.io/fuegovic/lc-config-downloader:latest
         environment:
-          - FILE_URL=https://my-custom-url-to/librechat.yaml
+          - CONFIG_URL=https://my-custom-url-to/librechat.yaml
         volumes:
           - shared-config:/shared
       # Meilisearch (Optional)
