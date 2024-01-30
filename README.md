@@ -2,6 +2,16 @@
 
 LC Config Downloader is a tool designed to facilitate the remote management of the LibreChat configuration file (`librechat.yaml`). It works by downloading a specified `librechat.yaml` file into a shared Docker volume, from where it can be utilized by the LibreChat container. This tool is particularly useful for scenarios requiring remote or automated configuration updates, and it supports integration with Portainer and standard Docker setups.
 
+- [Features](#features)
+- [Getting Started](#getting-started)
+- [Prerequisites](#prerequisites)
+- [Configuration](#configuration)
+    - [Environment Variables](#environment-variables)
+    - [Docker Compose Setup](#docker-compose-setup)
+        - [Standard Docker Installation](#standard-docker-installation)
+        - [Portainer Setup](#portainer-setup)
+    - [Usage](#usage)   
+
 ## Features
 
 - Download `librechat.yaml` from a specified URL.
@@ -28,7 +38,7 @@ To use LC Config Downloader, you'll need a Docker environment ready. The script 
 
 Here's how you can set it up using Docker Compose for both standard Docker installations and Portainer:
 
-**Standard Docker Installation:**
+#### Standard Docker Installation
 
 1. Create a `docker-compose.override.yaml` file in your project directory.
 2. Use the following template and adjust values as necessary:
@@ -42,15 +52,27 @@ Here's how you can set it up using Docker Compose for both standard Docker insta
       config-downloader:
         container_name: ConfigDownloader
         image: ghcr.io/fuegovic/lc-config-downloader:latest
-        environment:
-          - CONFIG_URL=https://my-custom-url-to/librechat.yaml
+        env_file:
+          - .env
         volumes:
           - shared-config:/shared
     volumes:
         shared-config:
     ```
+3. Add `CONFIG_URL=https://my-custom-url-to/librechat.yaml` to your LibreChat `.env` file. 
 
-**Portainer Setup:**
+4. **Note:** Update the URL with your own. If you prefer to add the URL directely in this compose file you can use:
+```
+        environment:
+          - CONFIG_URL=https://my-custom-url-to/librechat.yaml
+```
+and **remove:**
+```
+        env_file:
+          - .env
+```
+
+#### Portainer Setup
 
 1. Define your stack in Portainer using the following configuration, adjusting as necessary:
 
@@ -73,8 +95,8 @@ Here's how you can set it up using Docker Compose for both standard Docker insta
       config-downloader:
         container_name: ConfigDownloader
         image: ghcr.io/fuegovic/lc-config-downloader:latest
-        environment:
-          - CONFIG_URL=https://my-custom-url-to/librechat.yaml
+        env_file:
+          - stack.env
         volumes:
           - shared-config:/shared
       # Meilisearch (Optional)
@@ -89,6 +111,18 @@ Here's how you can set it up using Docker Compose for both standard Docker insta
     volumes:
         shared-config:
     ```
+2. Add `CONFIG_URL=https://my-custom-url-to/librechat.yaml` to your stack environment variables. 
+
+3. **Note:** Update the URL with your own. If you prefer to add the URL directely in this compose file you can use:
+```
+        environment:
+          - CONFIG_URL=https://my-custom-url-to/librechat.yaml
+```
+and **remove:**
+```
+        env_file:
+          - stack.env
+```
 
 ### Usage
 
@@ -102,4 +136,4 @@ For Portainer, add the configuration as a new stack and deploy it.
 
 ---
 
-Remember to replace placeholders (like repository URLs or container image paths) with actual values relevant to your setup. This README is a starting point, and you should adjust it to fit the specifics and requirements of your project more accurately.
+Remember to replace placeholders (like the config file URL) with actual values relevant to your setup. This README is a starting point, and you should adjust it to fit the specifics and requirements of your project more accurately.
