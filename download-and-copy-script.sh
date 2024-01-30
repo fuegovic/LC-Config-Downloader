@@ -1,11 +1,11 @@
 #!/bin/sh
 
 # Set FILE_URL to a default value if it's not already set
-FILE_URL="${FILE_URL:-https://raw.githubusercontent.com/danny-avila/LibreChat/main/librechat.example.yaml}"
+CONFIG_URL="${CONFIG_URL:-https://raw.githubusercontent.com/danny-avila/LibreChat/main/librechat.example.yaml}"
 
 # Use the environment variable to download the file to the shared volume
-if ! curl -o "/shared/librechat.yaml" "$FILE_URL"; then
-    echo "Error: Failed to download the file from $FILE_URL" >&2
+if ! curl -o "/shared/librechat.yaml" "$CONFIG_URL"; then
+    echo "Error: Failed to download the file from $CONFIG_URL" >&2
     exit 1
 fi
 
@@ -13,7 +13,7 @@ fi
 if [ -f "/shared/librechat.yaml" ]; then
     # Copy the file to the /app
     if cp "/shared/librechat.yaml" "../librechat.yaml"; then
-        echo "File copied successfully from $FILE_URL"
+        echo "File copied successfully from $CONFIG_URL"
     else
         echo "Error: Failed to copy librechat.yaml to /app" >&2
         exit 1
