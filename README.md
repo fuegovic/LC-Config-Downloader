@@ -1,5 +1,13 @@
 # LibreChat.yaml Config Downloader
 
+## ⚠️Deprecated!⚠️
+- You can now specify a URL for the LibreChat config using the environment variable `CONFIG_PATH=`.
+- If you need some ready-to-use config examples, check out: https://github.com/fuegovic/lc-config-yaml
+
+---
+---
+---
+
 LC Config Downloader is a tool designed to facilitate the remote management of the LibreChat configuration file (`librechat.yaml`). It works by downloading a specified `librechat.yaml` file into a shared Docker volume, from where it can be utilized by the LibreChat container. This tool is particularly useful for scenarios requiring remote or automated configuration updates, and it supports integration with Portainer and standard Docker setups.
 
 - [Features](#features)
